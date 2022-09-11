@@ -15,7 +15,7 @@ We then use ```WriteProcessMemory``` to write the path of our dll in the allocat
 Now for the most important part, we use ```CreateRemoteThread``` to start a new thread of execution in the remote process. We set the 'entrypoint' of our thread so that it starts at the address of the ```LoadLibraryA``` function. We also supply an argument to our thread which is the address of the dll path that was allocated earlier. When the thread starts it will execute the api call and pass as first and single parameter the dll that needs to be loaded.
 
 ## Basic implementation
-Here is a basic implementation which doesn't have error checking :
+Here is a basic implementation :
 
 ```cpp
 HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
@@ -23,3 +23,7 @@ void* allocated_memory = VirtualAllocEx(hProcess, 0, MAX_PATH, MEM_COMMIT | MEM_
 WriteProcessMemory(hProcess, allocated_memory, &(*argv[2]), MAX_PATH, 0);
 CreateRemoteThread(hProcess, 0, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, allocated_memory, 0, 0);
 ```
+
+## Demo
+
+![image](https://cdn.discordapp.com/attachments/780153367305256981/1018562091667443762/demo.gif)
