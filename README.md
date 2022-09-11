@@ -24,6 +24,6 @@ WriteProcessMemory(hProcess, allocated_memory, &(*argv[2]), MAX_PATH, 0);
 CreateRemoteThread(hProcess, 0, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, allocated_memory, 0, 0);
 ```
 
-## Demo
+## Showcase
 
 ![image](https://cdn.discordapp.com/attachments/780153367305256981/1018562091667443762/demo.gif)
